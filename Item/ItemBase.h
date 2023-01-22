@@ -17,11 +17,6 @@ class DUNGEONHERO1_API UItemBase : public UObject
 public:
 	UItemBase();
 
-	virtual class UWorld* Getworld() const {return World;};
-
-	UPROPERTY(Transient)
-	class UWorld* World;
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Item)
 	FText UseActionText;
 
