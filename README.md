@@ -1,4 +1,5 @@
 # UnrealPortpolio
+포트폴리오 목적으로 제작된 RPG 데모 게임입니다.
 
 # 플레이 동영상
 [![Video Label](http://img.youtube.com/vi/7sPk10bjTaY/0.jpg)](https://www.youtube.com/watch?v=7sPk10bjTaY)
@@ -8,14 +9,20 @@
 ## Controller - Character 구조
 ![image](https://user-images.githubusercontent.com/121685997/212113656-b9192749-69b3-4838-84c7-281d21282aae.png)
 
-
-
 ## EnemyCharacter
-- 
+걸어다니며 근접 공격을 하는 몬스터 캐릭터의 부모 클래스
+- HPBarWidget 관리
+- TakeDamage는 Characterstat 액터컴포넌트에서 처리
 
-> TakeDamage
+## DHCharacterStat
+> TakeDamage -> SetHP
+  float AEnemyCharacter::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	float FinalDamage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 
-## DHCharacter
+	MonsterStat->SetDamage(FinalDamage);
+	return FinalDamage;
+}
 
 
 
