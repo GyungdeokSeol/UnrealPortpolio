@@ -16,13 +16,14 @@
 
 ## DHCharacterStat
 > TakeDamage -> SetHP
-  float AEnemyCharacter::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
-{
-	float FinalDamage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 
-	MonsterStat->SetDamage(FinalDamage);
-	return FinalDamage;
-}
+    float AEnemyCharacter::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+	{
+		float FinalDamage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
+
+		MonsterStat->SetDamage(FinalDamage);
+		return FinalDamage;
+	}
 
 
 
