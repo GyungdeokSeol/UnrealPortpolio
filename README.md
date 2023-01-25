@@ -15,7 +15,7 @@
 - TakeDamage는 Characterstat 액터컴포넌트에서 처리
 
 ## DHCharacterStat
-> TakeDamage -> SetHP
+> TakeDamage -> SetDamage -> SetHP
 
     float AEnemyCharacter::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 	{
@@ -24,6 +24,24 @@
 		MonsterStat->SetDamage(FinalDamage);
 		return FinalDamage;
 	}
+	
+	void UDHMonsterStat::SetDamage(float NewDamage)
+	{
+		DHCHECK(nullptr != CurrentStatData);
+		SetHP(FMath::Clamp<float>(CurrentHP - NewDamage, 0.f, CurrentStatData->MaxHP));
+	}
+	
+	void UDHMonsterStat::SetHP(float NewHP)
+	{
+		CurrentHP = NewHP;
+		OnHPChanged.Broadcast();
+		if (CurrentHP < KINDA_SMALL_NUMBER)
+		{
+			CurrentHP = 0.f;
+			OnHPIsZero.Broadcast();
+		}
+	}
+
 
 
 
