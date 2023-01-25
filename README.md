@@ -42,20 +42,39 @@
 		}
 	}
 
-
-
+## EnemyCharacter 처리 방식(예시: DHTroll)
+- 애님블루프린트/비헤이비어트리
 
 > AnimBlueprint
-
-## EnemyCharacter 처리 방식(예시: DHTroll)
-- 애님BP/비헤이비어트리
+![image](https://user-images.githubusercontent.com/121685997/214459375-98142ae3-7fad-4855-b7cc-1657e8052aad.png)
+![image](https://user-images.githubusercontent.com/121685997/214459410-927229af-e793-4bea-bae6-bb14fa84c8d3.png)
 
 > BehaviorTree
+![image](https://user-images.githubusercontent.com/121685997/214459497-35ccc047-25d2-4e1e-8851-a11423276ae5.png)
+
 
 ## NormalMonsterAICon
-- 
-- 
+- BehaviorTree와 BlackBoard를 관리, 구동
 
 ## InventoryComponent
-- 
-- 
+- DHCharacter의 인벤토리 관리 ActorComponent
+- 아이템의 리스트 관리
+
+> AddItem
+
+	bool UInventoryComponent::AddItem(class UItemBase* Item)
+	{
+		if (Items.Num() >= Capacity || !Item)
+		{
+			return false;
+		}
+	
+		Item->OwningInventory = this;
+		Items.Add(Item);
+	
+		//UI update
+		OnInventoryUpdated.Broadcast();
+
+		return true;
+	}
+
